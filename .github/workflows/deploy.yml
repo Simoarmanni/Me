@@ -32,14 +32,16 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm install
 
       - name: Build project with Vite
         run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+        env:
+          GITHUB_PAGES: "true"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
