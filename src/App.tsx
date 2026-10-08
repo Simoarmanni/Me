@@ -86,7 +86,8 @@ export default function App() {
           if (
             parsed.shortBio?.includes("Professionista della comunicazione") || 
             parsed.shortBio?.includes("Curioso di default") ||
-            parsed.shortBio?.includes("Te vieni qua e ti aspetti")
+            parsed.shortBio?.includes("Te vieni qua e ti aspetti") ||
+            !parsed.extendedBio?.[0]?.includes("tarocchi")
           ) {
             parsed.shortBio = initialProfileIT.shortBio;
             parsed.extendedBio = initialProfileIT.extendedBio;
@@ -116,7 +117,8 @@ export default function App() {
           if (
             parsed.shortBio?.includes("Communication professional with") || 
             parsed.shortBio?.includes("Curious by nature, allergic to dullness") ||
-            parsed.shortBio?.includes("You come here expecting to read")
+            parsed.shortBio?.includes("You come here expecting to read") ||
+            !parsed.extendedBio?.[0]?.includes("tarot")
           ) {
             parsed.shortBio = initialProfileEN.shortBio;
             parsed.extendedBio = initialProfileEN.extendedBio;

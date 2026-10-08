@@ -65,10 +65,12 @@ export function LandingAbout({
 
   const totalSkillsCount = profile.keySkills.length + softSkills.length;
 
-  // Check if at least 7 skills are colored simultaneously (show with 7 colored labels)
+  // Check if at least 8 skills on desktop (or 7 on mobile) are colored simultaneously
   const checkEasterEgg = (colors: Record<string, string>) => {
     const activeCount = Object.keys(colors).length;
-    if (activeCount >= 7) {
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const requiredThreshold = isMobile ? 7 : 8;
+    if (activeCount >= requiredThreshold) {
       setShowEasterEgg(true);
       if (easterEggTimerRef.current) {
         clearTimeout(easterEggTimerRef.current);
@@ -121,7 +123,9 @@ export function LandingAbout({
       clearTimeout(skillLeaveTimersRef.current[key]);
     }
     assignSkillColor(key);
-    // Keep colored for 1s when clicked on mobile/desktop
+    // Keep colored for 1s on desktop, and 1.8s on mobile so user can easily tap 7 labels
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const clickDuration = isMobile ? 1800 : 1000;
     skillLeaveTimersRef.current[key] = setTimeout(() => {
       setHoveredSkillColors((prev) => {
         const next = { ...prev };
@@ -129,7 +133,7 @@ export function LandingAbout({
         return next;
       });
       delete skillLeaveTimersRef.current[key];
-    }, 1000);
+    }, clickDuration);
   };
 
   const handleAvatarClick = () => {

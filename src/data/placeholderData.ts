@@ -17,8 +17,8 @@ export const initialProfileIT: UserProfile = {
   tagline: "Amo lavorare, lo giuro",
   shortBio: "Per un breve periodo della mia vita la mia casella mail era diventata inutilizzabile per via dell'ammucchiarsi di tutte le offerte di lavoro che mi arrivavano giorno dopo giorno, senza nemmeno averle cercate. Preoccupato che la cosa potesse andare avanti a lungo, ho deciso di chiudere con l'informatica e di specializzarmi in un ambito nel quale sapevo che non avrei mai corso un tale rischio: la comunicazione.",
   extendedBio: [
-    "Finitoci per caso, devo ammettere mi ci sono subito appassionato. Ho presto scoperto che la comunicazione può essere molto di più che fare storie su instagram ed ingannare un manipolo di consumatori disattenti, ma se fatta bene può essere anche fare post su tiktok e ingannare un manipolo di consumatori attenti.",
-    "Su di me come persona invece, navigare questo sito vi dirà molto di più di qualsiasi testo stringato possa dirvi. La comunicazione in fondo è anche questo, non dire ma lasciar intendere."
+    "Finitoci per caso, devo ammettere mi ci sono subito appassionato. Ho presto scoperto che la comunicazione può essere molto di più che una manciata di storie su instagram per persuadere un pubblico di persone disattente. Se fatta bene infatti, la comunicazione può persino ingannare i più attenti tra il pubblico. Uno strumento dal potere formidabile quindi, e che per questo merita lo stesso rispetto della cartomanzia ed i tarocchi.",
+    "Su di me come persona invece, sono sicuro che navigare questo sito vi dirà molto più di quanto un testo stringato scritto apposta per compiacervi potrà mai dirvi. La comunicazione in fondo può funzionare, ed anzi, funziona meglio quando non è troppo esplicita."
   ],
   location: "Melzo (MI), Italia",
   status: "Aperto a nuove opportunità",
@@ -356,8 +356,8 @@ export const initialProfileEN: UserProfile = {
   tagline: "I love working, I swear",
   shortBio: "For a brief period in my life, my email inbox became unusable due to the sheer pile-up of job offers landing in it day after day, without me even looking for them. Worried that this might drag on for too long, I decided to pull the plug on computer science and specialize in a field where I knew I'd never run such a risk: communication.",
   extendedBio: [
-    "Having stumbled into it by accident, I must admit I was instantly hooked. I soon discovered that communication can be far more than just posting Instagram stories to deceive a handful of absent-minded consumers—done right, it can also mean making TikTok posts to deceive a handful of attentive consumers.",
-    "As for who I am as a person, exploring this site will tell you far more than any brief text ever could. After all, that's what communication is all about: not stating things outright, but letting them be understood."
+    "Having stumbled into it by accident, I must admit I was instantly hooked. I soon discovered that communication can be far more than just a handful of Instagram stories to persuade an absent-minded audience. When done right, in fact, communication can even deceive the most attentive people in the room. A formidable tool indeed, which for this reason deserves the exact same respect as fortune-telling and tarot cards.",
+    "As for who I am as a person, I am sure that browsing this website will tell you far more than any brief text written purposely to please you ever could. After all, communication can work—and in fact, works best—when it isn't overly explicit."
   ],
   location: "Melzo (Milan), Italy",
   status: "Open to new opportunities",
