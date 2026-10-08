@@ -173,8 +173,9 @@ export function WorkAndEducationTimeline({
 
   const targetIndexRef = useRef(0);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isInitialMount = useRef(true);
 
-  // Scroll to center card
+  // Scroll to center card horizontally within the carousel container ONLY (never moves window)
   const scrollToCard = useCallback((index: number, behavior: ScrollBehavior = "smooth") => {
     const container = scrollContainerRef.current;
     const targetCard = cardRefs.current[index];
@@ -182,10 +183,10 @@ export function WorkAndEducationTimeline({
       isScrollingInternalRef.current = true;
       if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
 
-      targetCard.scrollIntoView({
+      const targetLeft = targetCard.offsetLeft - (container.clientWidth - targetCard.clientWidth) / 2;
+      container.scrollTo({
+        left: Math.max(0, targetLeft),
         behavior,
-        inline: "center",
-        block: "nearest",
       });
 
       scrollTimeoutRef.current = setTimeout(() => {
@@ -210,6 +211,16 @@ export function WorkAndEducationTimeline({
 
   // Reset active index when filter changes
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      targetIndexRef.current = 0;
+      setActiveIndex(0);
+      setScrollProgress(0);
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft = 0;
+      }
+      return;
+    }
     targetIndexRef.current = 0;
     setActiveIndex(0);
     setScrollProgress(0);

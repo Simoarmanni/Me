@@ -33,6 +33,7 @@ export function LandingAbout({
   const [isWaving, setIsWaving] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const flipTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const avatarRetryRef = useRef(0);
   const [avatarSrc, setAvatarSrc] = useState<string>(() => {
     const saved = localStorage.getItem("simone_avatar");
     if (saved && saved !== "/DSC02231edit.jpg" && saved !== "/Media/Photos/Simone.jpg" && saved !== "./Media/Photos/Simone.jpg") {
@@ -41,6 +42,26 @@ export function LandingAbout({
     return profile.avatarUrl || "./Media/Simone.jpg";
   });
   const [imgError, setImgError] = useState(false);
+
+  const handleAvatarError = () => {
+    const fallbackList = [
+      "./Media/Simone.jpg",
+      "./Media/Photos/Simone.jpg",
+      "Media/Simone.jpg",
+      "/My-website/Media/Simone.jpg",
+      "/My-website/Media/Photos/Simone.jpg",
+      "/Media/Simone.jpg"
+    ];
+    if (avatarRetryRef.current < fallbackList.length) {
+      const nextCandidate = fallbackList[avatarRetryRef.current];
+      avatarRetryRef.current += 1;
+      if (nextCandidate !== avatarSrc) {
+        setAvatarSrc(nextCandidate);
+        return;
+      }
+    }
+    setImgError(true);
+  };
   const [showNextEmployee, setShowNextEmployee] = useState(false);
   const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -339,7 +360,7 @@ export function LandingAbout({
                       <img
                         src={avatarSrc}
                         alt={profile.name}
-                        onError={() => setImgError(true)}
+                        onError={handleAvatarError}
                         className="w-full h-full object-cover rounded-xl bg-slate-100"
                       />
                     ) : (

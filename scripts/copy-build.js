@@ -56,12 +56,29 @@ fs.writeFileSync(path.join(rootDir, '404.html'), notFoundHtml);
 fs.writeFileSync(path.join(distDir, '404.html'), notFoundHtml);
 console.log('Ensured 404.html in root and dist');
 
-// 6. Ensure Media in dist
+// 6. Ensure Media in both root and dist
 const distMediaDir = path.join(distDir, 'Media');
 const rootMediaDir = path.join(rootDir, 'Media');
-if (fs.existsSync(rootMediaDir) && !fs.existsSync(distMediaDir)) {
+const publicMediaDir = path.join(rootDir, 'public', 'Media');
+
+// Sync public/Media to root Media
+if (fs.existsSync(publicMediaDir)) {
+  fs.cpSync(publicMediaDir, rootMediaDir, { recursive: true });
+}
+
+// Ensure Simone.jpg is also in Media/Photos
+const rootSimone = path.join(rootMediaDir, 'Simone.jpg');
+const rootPhotosDir = path.join(rootMediaDir, 'Photos');
+if (fs.existsSync(rootSimone)) {
+  if (!fs.existsSync(rootPhotosDir)) fs.mkdirSync(rootPhotosDir, { recursive: true });
+  fs.copyFileSync(rootSimone, path.join(rootPhotosDir, 'Simone.jpg'));
+}
+
+// Sync root Media to dist/Media
+if (fs.existsSync(rootMediaDir)) {
+  if (fs.existsSync(distMediaDir)) fs.rmSync(distMediaDir, { recursive: true, force: true });
   fs.cpSync(rootMediaDir, distMediaDir, { recursive: true });
-  console.log('Copied Media -> dist/Media');
+  console.log('Synced Media -> dist/Media');
 }
 
 console.log('--- Post-build sync completed successfully! ---');

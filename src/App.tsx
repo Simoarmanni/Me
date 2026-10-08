@@ -170,6 +170,21 @@ export default function App() {
     timelineFilterRef.current = timelineFilter;
   }, [timelineFilter]);
 
+  // Ensure page always starts at top on initial load
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    if (window.location.hash) {
+      const el = document.querySelector(window.location.hash);
+      if (el) {
+        el.scrollIntoView();
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
+
   useEffect(() => {
     const handleFilterSync = (e: CustomEvent) => {
       if (e.detail?.tab && ["all", "work", "education"].includes(e.detail.tab)) {
