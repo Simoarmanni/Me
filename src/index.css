@@ -1,0 +1,357 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+
+  body {
+    overflow-x: clip;
+    max-width: 100vw;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #root {
+    overflow-x: clip;
+    max-width: 100vw;
+    width: 100%;
+  }
+}
+
+@supports not (overflow-x: clip) {
+  html, body, #root {
+    overflow-x: hidden;
+  }
+}
+
+/* Animations for colorful interactive elements */
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 3s ease infinite;
+}
+
+@keyframes pulse-radar {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-radar {
+  animation: pulse-radar 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(12px) rotate(-3deg);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes red-flash {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 0.25;
+    transform: scale(1.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.28);
+  }
+  75% {
+    opacity: 0.35;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-red-flash {
+  animation: red-flash 0.85s ease-in-out;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
+}
+
+@keyframes jiggle {
+  0% { transform: scale(1) rotate(0deg); }
+  15% { transform: scale(1.18) rotate(-16deg); }
+  30% { transform: scale(1.18) rotate(14deg); }
+  45% { transform: scale(1.12) rotate(-10deg); }
+  60% { transform: scale(1.06) rotate(6deg); }
+  75% { transform: scale(1.02) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.animate-jiggle {
+  animation: jiggle 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) both !important;
+}
+
+/* Hide scrollbar for clean horizontal timelines */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Print styling for Curriculum Vitae export/print */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .card-print {
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+}
+
+/* Night mode (Modalità Notte) rules */
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body,
+html.dark .bg-\[\#fafafa\] {
+  background-color: #0b0f19 !important;
+  color: #f1f5f9;
+}
+
+html.dark .bg-white {
+  background-color: #111827 !important;
+  color: #f8fafc;
+}
+
+html.dark .bg-white\/95 {
+  background-color: rgba(17, 24, 39, 0.95) !important;
+}
+
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/60,
+html.dark .bg-slate-50\/70,
+html.dark .bg-slate-100,
+html.dark .bg-slate-100\/70,
+html.dark .bg-slate-100\/80,
+html.dark .bg-slate-100\/90 {
+  background-color: #1e293b !important;
+  color: #f1f5f9;
+}
+
+html.dark .text-slate-900 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+
+html.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-200\/60,
+html.dark .border-slate-200\/80,
+html.dark .border-slate-200\/90,
+html.dark .border-slate-100 {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark nav.bg-slate-100\/80 {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+}
+
+html.dark .bg-emerald-50\/70 {
+  background-color: rgba(6, 78, 59, 0.3) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  color: #ecfdf5 !important;
+}
+
+/* Discover more (Scopri di più) night mode fix */
+html.dark #scopri-di-piu {
+  background: #0b0f19 !important;
+  background-image: none !important;
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark #scopri-di-piu .bg-white {
+  background-color: #111827 !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark #scopri-di-piu .bg-\[\#fafafa\],
+html.dark #scopri-di-piu .bg-slate-50,
+html.dark #scopri-di-piu .bg-slate-50\/80 {
+  background-color: #1e293b !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Animated shifting pastel blue-violet gradient for #about */
+@keyframes violet-fuchsia-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-animated-bg {
+  background: linear-gradient(135deg, #c7d2fe, #ddd6fe, #bfdbfe, #c4b5fd, #e0e7ff, #bae6fd);
+  background-size: 300% 300%;
+  animation: violet-fuchsia-shift 8s ease infinite;
+}
+
+html.dark .hero-animated-bg {
+  background: linear-gradient(135deg, #1e1b4b, #2e1065, #172554, #312e81, #1e1b4b);
+  background-size: 300% 300%;
+  animation: violet-fuchsia-shift 8s ease infinite;
+}
+
+/* Mi presento (#about) container card night mode accent styling */
+html.dark #about .bg-white\/95 {
+  background-color: rgba(21, 30, 51, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark #about .bg-white\/95:hover {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+html.dark #about .bg-slate-50\/80 {
+  background-color: #1e293b !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Night mode card & element hover border animations */
+html.dark .hover\:border-slate-300:hover,
+html.dark .dark\:hover\:border-slate-600:hover,
+html.dark .dark\:hover\:border-slate-700:hover,
+html.dark [class*="hover:border-"]:hover,
+html.dark [class*="dark:hover:border-"]:hover {
+  border-color: rgba(255, 255, 255, 0.38) !important;
+}
+
+html.dark [class*="hover:border-indigo-"]:hover,
+html.dark [class*="dark:hover:border-indigo-"]:hover {
+  border-color: rgba(129, 140, 248, 0.7) !important;
+}
+
+html.dark [class*="hover:border-rose-"]:hover,
+html.dark [class*="dark:hover:border-rose-"]:hover {
+  border-color: rgba(251, 113, 133, 0.7) !important;
+}
+
+html.dark [class*="hover:border-amber-"]:hover,
+html.dark [class*="dark:hover:border-amber-"]:hover {
+  border-color: rgba(251, 191, 36, 0.7) !important;
+}
+
+html.dark [class*="hover:border-emerald-"]:hover,
+html.dark [class*="dark:hover:border-emerald-"]:hover {
+  border-color: rgba(52, 211, 153, 0.7) !important;
+}
+
+html.dark [class*="hover:border-sky-"]:hover,
+html.dark [class*="dark:hover:border-sky-"]:hover {
+  border-color: rgba(56, 189, 248, 0.7) !important;
+}
+
+html.dark [class*="hover:border-blue-"]:hover,
+html.dark [class*="dark:hover:border-blue-"]:hover {
+  border-color: rgba(96, 165, 250, 0.7) !important;
+}
+
+
