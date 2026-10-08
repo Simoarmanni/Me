@@ -286,9 +286,27 @@ async function start() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "custom",
     });
     app.use(vite.middlewares);
+
+    // Serve development HTML transformed by Vite for HTML requests
+    app.use(async (req, res, next) => {
+      const url = req.originalUrl;
+      if (req.method !== "GET" || url.startsWith("/api") || url.startsWith("/Media") || (url.includes(".") && !url.endsWith(".html"))) {
+        return next();
+      }
+      try {
+        const devHtmlPath = path.join(process.cwd(), "index.dev.html");
+        const template = fs.existsSync(devHtmlPath)
+          ? fs.readFileSync(devHtmlPath, "utf-8")
+          : fs.readFileSync(path.join(process.cwd(), "index.html"), "utf-8");
+        const html = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
